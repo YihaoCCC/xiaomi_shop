@@ -1,0 +1,30 @@
+@mixin flex($hov:space-between,$col:center){
+  display: flex;
+  justify-content: $hov;
+  align-items: $col;
+}//flex布局实现两端对其，上下居中
+@mixin bgImg($w:0,$h:0,$img:'',$size:contain){
+  display: inline-block;
+  width: $w;
+  height: $h;
+  /*background: url("./public/imgs/icon-cart-checked.png") no-repeat center;*/
+  background: url($img) no-repeat center;
+  background-size: $size;
+}
+@mixin  position($pos:absolute,$top:0,$left:0,$w:100%,$h:100% ){
+  position: $pos;
+  top:$top;
+  left: $left;
+  width: $w;
+  height: $h;
+}
+@mixin positionImg($position,$top:0,$right:0,$w:0,$h:0, $img:'',$size:contain){
+  position: $position;
+  top:$top;
+  right:$right;
+  width: $w;
+  height: $h;
+  /*background: url("./public/imgs/icon-cart-checked.png") no-repeat center;*/
+  background: url($img) no-repeat center;
+  background-size: $size;
+}
