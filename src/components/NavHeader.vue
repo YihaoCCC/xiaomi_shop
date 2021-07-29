@@ -3,10 +3,10 @@
         <div class="nav-topbar">
             <div class="container">
                 <div class="topbar-menu">
-                    <a href="javascript:;">小米商城</a>
-                    <a href="javascript:;">MIUI</a>
-                    <a href="javascript:;">云服务</a>
-                    <a href="javascript:;">协议规则</a>
+                    <a href="https://www.mi.com/index.html" target="_blank">小米商城</a>
+                    <a href="https://home.miui.com/" target="_blank">MIUI 12.5</a>
+                    <a href="https://i.mi.com/" target="_blank">云服务</a>
+                    <a href="https://www.mi.com/aptitude/list" target="_blank">协议规则</a>
                 </div>
                 <div class="topbar-user">
                     <a href="javascript:;" v-if="username">{{username}}</a>
@@ -43,8 +43,9 @@
                     </div>
                     <div class="item-menu">
                         <span>RedMI红米</span>
-<!--                        <div class="children">-->
-<!--                        </div>-->
+                        <div class="children">
+                            红米？黑米都不写了
+                        </div>
                     </div>
                     <div class="item-menu">
                         <span>米家电视</span>

@@ -11,7 +11,7 @@
                         {{item.receiverMobile}}
                     </div>
                     <div class="address">
-                        {{item.receiverAddress}}
+                        {{item.receiverCity}} {{item.receiverDistrict}} {{item.receiverAddress}}
                     </div>
                     <div class="deleteEdit ">
                         <svg @click="openDelete(item)"  t="1627055165994" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="809" width="32" height="32"><path d="M92.748283 203.507071h838.503434v44.140606H92.748283zM644.402424 115.238788v44.127677h44.127677V115.238788c0-24.384646-19.75596-44.127677-43.998384-44.127677h-265.050505a43.97899 43.97899 0 0 0-31.172525 12.916364 43.918222 43.918222 0 0 0-12.825859 31.211313v44.127677h44.127677V115.238788h264.791919z m0 0" p-id="810" fill="#666666"></path>
@@ -111,6 +111,7 @@
                             <option value="石景山区">石景山区</option>
                             <option value="大兴区">大兴区</option>
                             <option value="朝阳区">朝阳区</option>
+                            <option value="西青区">西青区</option>
                         </select>
                     </div>
                     <div class="item">
@@ -127,6 +128,7 @@
 
 <script>
     import Modal from "@/components/Modal";
+    import testPhone from "@/util/testPhone";
     export default {
         components: {Modal},
         component:{
@@ -189,8 +191,9 @@
                    let message='';
                     if(!receiverName){
                        message='收货人姓名未填写！';
-                   } else if(!receiverMobile || !/\d{11}/.test(receiverMobile) ){
-                        message='联系人电话未填写或电话号码格式错误'
+                   } else if(!receiverMobile || testPhone.testPhone(receiverMobile) !=1 ){
+                        message = testPhone.testPhone(receiverMobile);
+
                     }
                     else if(!receiverProvince || !receiverCity || !receiverDistrict ){
                         message='请选择地区'

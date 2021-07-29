@@ -19,11 +19,15 @@
                         </li>
                         <li class="menu-item">
                             <a href="javascript:;">电视 盒子</a>
-
+                            <div class="children">
+                                没有图片了，不写了
+                            </div>
                         </li>
                         <li class="menu-item">
                             <a href="javascript:;">笔记本 平板</a>
-
+                            <div class="children">
+                                没有图片了，不写了
+                            </div>
                         </li>
                         <li class="menu-item">
                             <a href="javascript:;">家电 插线板</a>

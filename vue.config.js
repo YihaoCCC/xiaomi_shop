@@ -10,7 +10,11 @@ module.exports={
                }
            }
        },
-       hot:true
-   }
+       hot:true,
 
+   },
+    productionSourceMap:false,//将线上部署的项目的包中的源码map隐藏
+    chainWebpack:(config)=>{
+        config.plugins.delete('prefetch')
+    }
 }

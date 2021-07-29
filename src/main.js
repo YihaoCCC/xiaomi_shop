@@ -5,9 +5,11 @@ import router from "@/router/router";
 import VueLazyload from "vue-lazyload";
 import VueCookie from 'vue-cookie'
 import store from './store'
-import { Message } from 'element-ui';
+import { Message, Button } from 'element-ui';
 import { Loading } from "element-ui";
 import 'element-ui/lib/theme-chalk/index.css';
+import infiniteScroll from 'vue-infinite-scroll'
+
 import App from './App.vue'
 
 
@@ -45,7 +47,9 @@ axios.interceptors.response.use(function (response) {
 Vue.use(VueCookie);
 // Vue.use(Message);//此方法会出现空白弹框
 Vue.component(Message.name,Message);
+Vue.component(Button.name,Button);
 Vue.use(Loading)
+Vue.use(infiniteScroll)
 Vue.use(VueLazyload,{
   loading:require("./assets/imgs/loading-svg/loading-bars.svg")
 })//图片懒加载

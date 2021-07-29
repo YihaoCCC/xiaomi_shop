@@ -1,10 +1,11 @@
 <template>
-    <div class="list">
-        <!--加载数据loading组件展示-->
+    <div class="list" >
+        <!--加载数据loading组件展示  v-loading="loading"   -->
         <loading v-if="loading "></loading>
         <!--orderList主组件展示-->
+        <div  v-show="!loading">
         <div class="order-list" v-for="(item,index) in orderList " :key="index"
-        v-loading="loading"
+
         >
             <div class="order-list-header">
                 <div class="left">
@@ -29,7 +30,7 @@
                     元
                 </div>
             </div>
-            <div class="order-list-content" v-for="(orderPayList,index) in item.orderItemVoList" :key="index">
+            <div class="order-list-content" v-for="(orderPayList,index) in item.orderItemVoList" :key="index" >
                 <div class="left">
                     <img v-lazy="orderPayList.productImage" alt="">
 
@@ -49,8 +50,17 @@
                     <span> 订单已支付</span>
                 </div>
             </div>
+
         </div>
-        <el-pagination style="margin-left:1060px"></el-pagination>
+        <!--第一种方法分页器加载-->
+        <el-pagination style="margin-left:1000px;margin-top: 20px"  background
+                       layout="prev, pager, next" :total="20"  @current-change="handleChange"  v-show="false"  ></el-pagination>
+        <!--第二种方法：按钮加载更多-->
+        <el-button :loading="buttonLoad" type="warning" round @click="buttonMore" style="margin-top: 20px"> 加载更多 </el-button></div>
+        <!--第三种方法：滚动加载-->
+<!--        <div class="scrollMore"  v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" :infinite-scroll-distance="100" v-show="scrollLoading"    >-->
+<!--            <img src="/imgs/loading-svg/loading-spinning-bubbles.svg" alt="">-->
+<!--        </div>-->
         <!--无数据展示组件-->
         <no-data v-if="!loading && orderList.length === 0"></no-data>
     </div>
@@ -60,6 +70,7 @@
 import Loading from './../components/Loading'
 import NoData from "@/components/NoData";
 import { Pagination } from "element-ui"
+
      export default {
         name: "orderList",
         components:{
@@ -70,17 +81,31 @@ import { Pagination } from "element-ui"
         data(){
             return{
                 orderList:[],
-                loading:true
+                loading:true,//加载页面时全局加载显示
+                pageNum:1,
+                buttonLoad:false,//控制按钮加载显示
+                busy:true,//滚动控制加载方法
+                scrollLoading:false//控制滚动加载显示
             }
         },
         mounted(){
+            this.busy=true;
           this.getOrderList();
         },
         methods:{
           getOrderList(){
-              this.axios.get('/orders').then((res)=>{
-                  this.loading = false
-                  this.orderList=  res.list;
+
+              this.axios.get('/orders',{
+                  params:{
+                      pageSize:3,
+                      pageNum:this.pageNum,
+                  }
+              }).then((res)=>{
+                  setTimeout(()=>{
+                      this.loading = false
+                      this.orderList= res.list;
+                      this.busy=false;
+                  },2000)
 
               }).catch(()=>{
                   this.loading=false
@@ -102,6 +127,74 @@ import { Pagination } from "element-ui"
                         orderNo
                     }
                 })
+            },
+            //第一种方法分页器
+            handleChange(pageNum){
+              this.pageNum=pageNum;
+              this.loading=true;
+              setTimeout(()=>{
+                  this.getOrderList();
+              },1000)
+
+            },
+            //第二种方法按钮加载更多
+            buttonMore(){
+              this.pageNum++;
+                this.buttonLoad=true;
+                this.axios.get('/orders',{
+                    params:{
+                        pageSize:3,
+                        pageNum:this.pageNum,
+                    }
+                }).then((res)=>{
+                    this.orderList= this.orderList.concat( res.list);
+                    this.buttonLoad = false;
+                    if(!res.hasNextPage){
+                        this.$message.warning("已经到尽头了喔！")
+                    }
+                }).catch(()=>{
+                    this.buttonLoad = false;
+                    this.$message.error("数据加载失败请稍后重试！")
+                })
+            },
+            //第三种方法滚动加载更多
+            loadMore: function() {
+                this.busy = true;
+                this.scrollLoading = true
+                setTimeout(() => {
+                    this.pageNum++;
+                    console.log(this.pageNum)
+                    // this.axios.get('/orders',{
+                    //     params:{
+                    //         pageSize:3,
+                    //         pageNum:this.pageNum,
+                    //     }
+                    // }).then((res)=>{
+                    //     this.orderList = this.orderList.concat( res.list);
+                    //     this.scrollLoading = false;
+                    //     if(res.hasNextPage){
+                    //         this.busy = false;
+                    //         this.scrollLoading = false;
+                    //         this.$message.info("数据加载中！")
+                    //     }
+                    //     else {
+                    //         this.scrollLoading = false;
+                    //         this.$message.error("已经到尽头了喔！")
+                    //     }
+                    //
+                    // }).catch(() => {
+                    //     this.busy = true;
+                    //     this.$message.error("数据加载失败请稍后重试！")
+                    // })
+                }, 1000);
+            },
+            scrollMore(){
+                // this.busy=true
+                // setTimeout(()=>{
+                //     this.pageNum++;
+                //     console.log(this.pageNum)
+                // },1000)
+console.log(this.pageNum++)
             }
         },
         computed:{
@@ -117,7 +210,21 @@ import { Pagination } from "element-ui"
 
 <style lang="scss">
     @import "./../assets/scss/config";
+
     .list{
+        text-align: center;
+        .el-pagination.is-background .el-pager li:not(.disabled).active{
+            background-color: #FF6600;
+        }
+        .el-pagination.is-background .el-pager li:hover{
+            color: white;
+        }
+        .el-button--warning {
+            background-color: #FF6600;
+            border-color: #FF6600;
+        }
+
+
         .order-list{
             margin: auto;
             box-sizing: border-box;

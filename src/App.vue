@@ -5,8 +5,7 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import storage from './storage/index'
+
 
 export default {
   name: 'App',
