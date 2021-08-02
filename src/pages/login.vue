@@ -69,9 +69,21 @@
                     username,
                     password
                 }).then((res)=>{
-                    this.$cookie.set('userId',res.id,{expires:'1D'})
+                    this.$cookie.set('userId',res.id,{expires:'Session'})
                     this.$store.dispatch('saveUserName',res.username)
-                    this.$router.push('/index')
+                    // this.$router.push({
+                    //     path:'/index',
+                    //     query:{
+                    //         from:'login',
+                    //     }
+                    // })
+                    //两种传参方式
+                    this.$router.push({
+                        name:'index',//对应的是router.js中定义的路由地址名称
+                        params:{
+                            from:'login',
+                        }
+                    })
                 })
             },
             register(){

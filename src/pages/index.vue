@@ -414,7 +414,7 @@
                             }
                         }
                         .children{
-                            transition: all 1s;
+                            transition: all 0.7s;
                             overflow: hidden;
                             width: 0;
                             height: 451px;

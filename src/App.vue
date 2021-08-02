@@ -30,9 +30,11 @@ export default {
     }
   },
   mounted(){
-    console.log("我加载了一次");
-    this.getUser();
-    this.getCartCount();
+    if(this.$cookie.get('userId')){
+      this.getUser();
+      this.getCartCount();
+    }
+
     // storage.setItem('a',1)
     // storage.setItem('user',{a:1});
     // storage.setItem('abc',{a:1},'user');
