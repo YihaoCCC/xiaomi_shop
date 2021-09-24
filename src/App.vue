@@ -1,15 +1,19 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <Notice :showNotice=show />
   </div>
 </template>
 
 <script>
 
+    import Notice from '@/components/Notice'
 
 export default {
+  
   name: 'App',
   components: {
+            Notice
 
   },
   methods:{
@@ -26,7 +30,8 @@ export default {
   },
   data(){
     return{
-      testres:{}
+      testres:{},
+      show: true
     }
   },
   mounted(){
