@@ -2,19 +2,19 @@
     <div class="footer">
         <div class="footer-logo">
             <img src="../assets/imgs/logo-footer.png" alt="">
-            <p>小米商城</p>
+            <p>YY商城</p>
         </div>
 
         <div class="footer-link">
             <a href="https://www.runoob.com/" target="_blank">菜鸟教程</a>
             <a href="http://nodejs.cn/learn" target="_blank">Node.js</a>
             <a href="http://60.205.208.162/" target="_blank">陈奕豪服务器(已关闭)</a>
-            <a href="https://www.imooc.com/" target="_blank">慕课网</a>
-            <a href="https://coding.imooc.com/?c=fe" target="_blank">实战课618专享优惠课程</a>
+            <a href="https://www.javascript.com/" target="_blank">JavaScript</a>
+            <a href="https://react.docschina.org/" target="_blank">React</a>
             <a href="https://cn.vuejs.org/" target="_blank">Vue.js </a>
         </div>
         <div >
-            <p>Copyright ©1 <span class="copyright">mi.futurefe.com@陈奕豪</span> All Rights Reserved.</p>
+            <p>Copyright © <span class="copyright">mi.futurefe.com@陈奕豪</span> All Rights Reserved.</p>
         </div>
     </div>
 </template>

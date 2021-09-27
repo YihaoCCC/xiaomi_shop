@@ -12,13 +12,13 @@ import infiniteScroll from 'vue-infinite-scroll'
 
 import App from './App.vue'
 
-// import env from './env'
+import env from './env'
 
 //根据前端的跨域方式做调整 要去/a/b后端端口  前端接口写的是 :/api/a/b   经过此处转换成 /a/b
-axios.defaults.baseURL='/api';//基于代理的跨域问题
+// axios.defaults.baseURL='/api';//基于代理的跨域问题
 axios.defaults.timeout=6000;//超时处理
 // 根据环境变量获取不同的请求地址
-// axios.defaults.baseURL = env.baseURL;
+axios.defaults.baseURL = env.baseURL;
 //接口错误拦截
 axios.interceptors.response.use(function (response) {
   //response是针对返回值的拦截和处理

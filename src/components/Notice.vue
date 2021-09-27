@@ -1,11 +1,11 @@
 <template>
     <div>
-        <el-button type="danger" class="notice" @click="dialogVisible = true">陈一奕Tips</el-button>
+        <el-button type="danger" class="notice" @click="dialogVisible = true">陈一亿Tips</el-button>
          <el-dialog
-            title="Notices From Cyh Website（本站数据来源：https://www.imooc.com）"
+            title="Notices From Cyh Website"
             :visible.sync="dialogVisible"
             width="70%"
-            top="28px"
+            top="10vh"
             :close-on-click-modal='false'
             >
             <img src="../assets/notice.gif" alt="">
@@ -42,9 +42,14 @@ export default {
  .el-dialog__wrapper{
         .el-dialog {
             border-radius: 20px;
+            
             .el-dialog__body{
                     padding-top: 5px;
                     padding-bottom: 5px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
         }
     }
